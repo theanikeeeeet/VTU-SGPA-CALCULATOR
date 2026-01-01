@@ -1,5 +1,7 @@
 # VTU SGPA Calculator ⚡
 
+[![CI](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/ci.yml/badge.svg)](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/ci.yml)
+
 **VTU SGPA Calculator** is a lightweight React app to help VTU students calculate semester SGPA/CGPA, visualize subject marks with charts, and export results. This repository contains the source code, contribution guidelines, and information to run, test, and extend the project.
 
 ---
