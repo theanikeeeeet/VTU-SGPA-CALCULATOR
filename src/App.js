@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import Charts from "./components/Charts.js";
+import SubjectRow from "./components/SubjectRow.js";
 import "./App.css";
 import vtuSubjects from "./data/vtuSubjects";
 
@@ -47,81 +48,84 @@ function App() {
   const calculateSGPA = () => {
     let totalCredits = 0;
     let weightedPoints = 0;
+    let hasValid = false;
 
     subjects.forEach((s) => {
-      const mk = parseFloat(s.marks);
-      const cr = parseFloat(s.credits);
-      if (!isNaN(mk) && !isNaN(cr)) {
+      const mk = Number(s.marks);
+      const cr = Number(s.credits);
+      if (Number.isFinite(mk) && Number.isFinite(cr) && mk >= 0 && mk <= 100) {
+        hasValid = true;
         totalCredits += cr;
         weightedPoints += getGradePoint(mk) * cr;
       }
     });
 
-    if (totalCredits === 0) {
-      setResult("Please enter valid marks to calculate SGPA.");
+    if (!hasValid || totalCredits <= 0) {
+      setResult('Please enter at least one valid mark (0–100) to calculate SGPA.');
       return;
     }
 
-    const sgpa = (weightedPoints / totalCredits).toFixed(2);
-    setResult(`SGPA: ${sgpa}`);
+    const sgpa = Math.round((weightedPoints / totalCredits) * 100) / 100;
+    setResult(`SGPA: ${sgpa.toFixed(2)}`);
   };
 
   const addSemester = () => {
-    if (!result.includes("SGPA")) {
-      alert("Calculate SGPA before saving!");
+    if (!result || typeof result !== 'string' || !result.startsWith('SGPA')) {
+      alert('Calculate SGPA before saving!');
       return;
     }
-    const sgpaValue = parseFloat(result.replace("SGPA: ", ""));
+    const sgpaValue = parseFloat(result.replace('SGPA: ', '')) || 0;
+    const totalCredits = subjects.reduce((a, s) => {
+      const c = Number(s.credits);
+      return a + (Number.isFinite(c) ? c : 0);
+    }, 0);
     setAllSemesters([
       ...allSemesters,
-      { semester, sgpa: sgpaValue, credits: subjects.reduce((a, s) => a + parseFloat(s.credits), 0) },
+      { semester, sgpa: Number(sgpaValue.toFixed(2)), credits: totalCredits },
     ]);
   };
 
   const calculateCGPA = () => {
-    if (allSemesters.length === 0) {
-      setResult("Add at least one semester first!");
+    if (!allSemesters || allSemesters.length === 0) {
+      setResult('Add at least one semester first!');
       return;
     }
     let totalCr = 0;
     let weightedSum = 0;
     allSemesters.forEach((sem) => {
-      totalCr += sem.credits;
-      weightedSum += sem.sgpa * sem.credits;
+      const c = Number(sem.credits);
+      const s = Number(sem.sgpa);
+      if (Number.isFinite(c) && Number.isFinite(s)) {
+        totalCr += c;
+        weightedSum += s * c;
+      }
     });
-    const cgpa = (weightedSum / totalCr).toFixed(2);
-    setResult(`CGPA: ${cgpa}`);
-  };
-
-  const exportToPDF = () => {
-    const exportNode = document.getElementById("export-area");
-    if (!exportNode) {
-      alert("Nothing to export!");
+    if (totalCr === 0) {
+      setResult('No credit information found for semesters.');
       return;
     }
+    const cgpa = Math.round((weightedSum / totalCr) * 100) / 100;
+    setResult(`CGPA: ${cgpa.toFixed(2)}`);
+  };
 
-    setTimeout(() => {
-      html2canvas(exportNode, { scale: 3 })
-        .then((canvas) => {
-          const imgData = canvas.toDataURL("image/png");
-          const pdf = new jsPDF("p", "mm", "a4");
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight =
-            (canvas.height * pdfWidth) / canvas.width;
-          pdf.addImage(
-            imgData,
-            "PNG",
-            0,
-            0,
-            pdfWidth,
-            pdfHeight
-          );
-          pdf.save("VTU-GradeFlow-Report.pdf");
-        })
-        .catch(() => {
-          alert("Export failed. Try again!");
-        });
-    }, 100);
+  const exportToPDF = async () => {
+    try {
+      const exportNode = document.getElementById('export-area');
+      if (!exportNode) {
+        alert('Nothing to export!');
+        return;
+      }
+      const canvas = await html2canvas(exportNode, { scale: 3 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('VTU-GradeFlow-Report.pdf');
+    } catch (err) {
+      // console.error(err);
+      alert('Export failed. Please try again.');
+    }
   };
 
   return (
@@ -233,33 +237,22 @@ function App() {
               </div>
 
               {subjects.map((sub, idx) => (
-                <div className="subject-row" key={idx}>
-                  <div className="sub-info">
-                    {sub.code} — {sub.name} ({sub.credits} cr)
-                  </div>
-                  <input
-                    type="number"
-                    placeholder="Marks"
-                    value={sub.marks}
-                    onChange={(e) =>
-                      handleMarks(idx, e.target.value)
-                    }
-                  />
-                </div>
+                <SubjectRow key={`${sub.code}-${idx}`} subject={sub} index={idx} onChange={handleMarks} />
               ))}
 
-              <div
-                style={{ textAlign: "center", marginTop: "1rem" }}
-              >
-                <button onClick={calculateSGPA}>
+              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+                <button onClick={calculateSGPA} disabled={!subjects.some(s => { const m = parseFloat(s.marks); return Number.isFinite(m) && m >= 0 && m <= 100; })}>
                   Calculate SGPA
                 </button>
-                <button onClick={addSemester}>
+                <button onClick={addSemester} disabled={!result.toString().startsWith('SGPA')}>
                   Save Semester
                 </button>
                 <button onClick={exportToPDF}>
                   Export Result
                 </button>
+              </div>
+              <div style={{ marginTop: '6px', textAlign: 'center', color: '#6c6e8a', fontSize: 13 }}>
+                <em>Enter valid marks (0–100). Empty fields are ignored.</em>
               </div>
 
               <div className="result-box">{result}</div>
