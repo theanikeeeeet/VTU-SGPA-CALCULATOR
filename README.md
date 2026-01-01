@@ -1,8 +1,9 @@
 # VTU SGPA Calculator ⚡
 
-[![CI](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/ci.yml/badge.svg)](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/ci.yml)
+[![CI](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/ci.yml/badge.svg)](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions)
+[![Pages](https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR/actions/workflows/deploy.yml/badge.svg)](https://theanikeeeeet.github.io/VTU-SGPA-CALCULATOR)
 
-**VTU SGPA Calculator** is a lightweight React app to help VTU students calculate semester SGPA/CGPA, visualize subject marks with charts, and export results. This repository contains the source code, contribution guidelines, and information to run, test, and extend the project.
+**A fast, privacy-first SGPA/CGPA calculator for VTU students.** Enter marks, see charts, and export results — all in seconds.
 
 ---
 
@@ -10,112 +11,78 @@
 
 ![App screenshot](assets/screenshot.png)
 
-> Tip: Replace `assets/screenshot.png` with an actual screenshot image (or `assets/screenshot.jpg`) to show the app UI in the README.
+**Live demo:** https://theanikeeeeet.github.io/VTU-SGPA-CALCULATOR
 
 ---
 
-## 🚀 Features
+## ✨ Highlights
 
-- Easy input UI for subject marks and credits
-- Live visualizations using Chart.js for mark distribution and trends
-- Export results (PDF/screenshot) for record keeping
-- Responsive, accessible UI built with React
-- Simple zero-configuration developer experience (Create React App)
-
----
-
-## 🧰 Tech Stack
-
-- React
-- Chart.js
-- html2canvas + jsPDF (for exports)
-- Create React App
+- Clean, minimal UI for quick input
+- Interactive charts (Chart.js) for marks vs credits
+- Export results as PDF / screenshot
+- Mobile-friendly and accessible
+- Easy to extend — built with Create React App
 
 ---
 
-## 💻 Quick Start
+## 🚀 Quick Start (3 steps)
 
-### Prerequisites
-- Node.js v16 or later
-- npm
-
-### Clone the repo
+1) Clone:
 
 ```bash
 git clone https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR.git
 cd VTU-SGPA-CALCULATOR
 ```
 
-### Install dependencies
+2) Install:
 
 ```bash
 npm install
 ```
 
-### Run in development
+3) Run:
 
 ```bash
 npm start
-```
-
-Open http://localhost:3000 in your browser. The app reloads automatically when you edit files.
-
-### Build for production
-
-```bash
-npm run build
-```
-
-The production-ready files will be in the `build/` directory.
-
-### Tests
-
-```bash
-npm test
+# open http://localhost:3000
 ```
 
 ---
 
-## 📁 Project Structure
+## 🧩 Scripts
 
-- `src/` — application source code
-- `public/` — static files and `index.html`
-- `assets/` — images/screenshots used in the README or app
-- `package.json` — scripts and dependencies
-
----
-
-## 🛠️ Development Notes
-
-- You can run ESLint and Prettier if configured in the project.
-- To capture a screenshot for the README, run the app locally and save a screenshot to `assets/screenshot.png`.
+- `npm start` — dev server
+- `npm run build` — production build
+- `npm test` — run tests
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read `CONTRIBUTING.md` for guidelines on reporting issues, proposing changes, and submitting pull requests. Be sure to:
+Small, focused PRs are welcome. See `CONTRIBUTING.md` for guidelines — include tests for logic and a short description of your change.
 
-- Fork the repo
-- Create a feature branch
-- Add tests where appropriate
-- Submit a clear PR description
+---
+
+## 📦 Structure (short)
+
+- `src/` — source code
+- `assets/` — images & screenshots
+- `public/` — static files
+
+---
+
+## 📣 Deploy & CI
+
+- CI runs tests & build on each push (GitHub Actions).
+- GitHub Pages auto-deploys `main` (see `.github/workflows/deploy.yml`).
+- Use the **Capture runtime screenshot** workflow to refresh the README image.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the `LICENSE` file for details.
+MIT — see `LICENSE`.
 
 ---
 
-## 📬 Contact
-
-If you have questions, feature requests, or suggestions, open an issue or submit a PR on GitHub: https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR
-
----
-
-### Acknowledgements
-
-Thanks to the open-source libraries and communities that make projects like this possible.
-
+Made with ❤️ for VTU students — concise, practical, and ready to improve.
