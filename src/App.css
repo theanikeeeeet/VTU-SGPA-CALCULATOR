@@ -39,11 +39,12 @@ body,
 
 /* Main card */
 .card-main {
-  width: 900px;
+  width: 100%;
+  max-width: 920px;
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 6px 20px var(--shadow-soft);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 24px var(--shadow-soft);
   border: 1px solid var(--border-soft);
 }
 
