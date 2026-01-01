@@ -20,8 +20,10 @@
 - Clean, minimal UI for quick input
 - Interactive charts (Chart.js) for marks vs credits
 - Export results as PDF / screenshot
-- Mobile-friendly and accessible
+- Mobile-first, accessible, and responsive
 - Easy to extend — built with Create React App
+
+**Privacy:** All data stays in your browser — nothing is sent to a server or stored remotely.
 
 ---
 
