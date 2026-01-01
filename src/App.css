@@ -1,0 +1,209 @@
+/* =================================================
+   VTU GradeFlow — Centered Tab Navigation & Clean UI
+   ================================================= */
+
+/* Root Colors */
+:root {
+  --bg-page: #f7f8fa;
+  --card-bg: #ffffff;
+  --surface-soft: #f1f3f6;
+  --accent-primary: #5b5fde;
+  --accent-light: #7f7ffe;
+  --text-main: #2b2d42;
+  --text-secondary: #6c6e8a;
+  --border-soft: #d7d9e3;
+  --input-bg: #fafbfc;
+  --shadow-soft: rgba(0, 0, 0, 0.08);
+}
+
+/* Global layout */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-page);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+}
+
+/* Center container */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+}
+
+/* Main card */
+.card-main {
+  width: 900px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+/* Header title */
+header {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--accent-primary);
+}
+
+/* ===== CENTERED TABS ===== */
+.tabs-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+
+.selector-tabs {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.selector-tab {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  background: var(--surface-soft);
+  border-radius: 50px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.25s ease-in-out;
+}
+
+.selector-tab:hover {
+  background: var(--accent-light);
+  color: #fff;
+  border-color: var(--accent-light);
+  box-shadow: 0 0 8px var(--accent-light);
+}
+
+.selector-tab.active {
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary);
+}
+
+/* ===== FORM SELECTORS ===== */
+.form-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+select {
+  flex: 1;
+  padding: 10px 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  font-size: 0.97rem;
+  color: var(--text-main);
+}
+
+/* ===== SUBJECT ROWS ===== */
+.subject-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.sub-info {
+  flex: 1.3;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Inputs */
+input[type="number"] {
+  width: 90px;
+  padding: 8px 10px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 7px;
+  font-size: 0.94rem;
+  color: var(--text-main);
+}
+
+input[type="number"]:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* Buttons */
+button {
+  background: var(--accent-primary);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 6px 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px var(--shadow-soft);
+  transition: 0.22s ease;
+}
+
+button:hover {
+  background: var(--accent-light);
+  box-shadow: 0 6px 12px var(--shadow-soft);
+}
+
+/* Result display */
+.result-box {
+  margin-top: 1.3rem;
+  background: var(--surface-soft);
+  border-left: 4px solid var(--accent-primary);
+  padding: 12px 18px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--shadow-soft);
+}
+
+/* Semester list */
+.sem-list {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive styles */
+@media (max-width: 880px) {
+  .card-main {
+    width: 94%;
+  }
+
+  .form-group {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .subject-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input[type="number"] {
+    width: 100%;
+  }
+}
