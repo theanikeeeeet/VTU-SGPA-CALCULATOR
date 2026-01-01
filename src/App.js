@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+// lazy imports for heavy browser-only libs (avoids test failures)
+
 import Charts from "./components/Charts.js";
 import SubjectRow from "./components/SubjectRow.js";
 import "./App.css";
 import vtuSubjects from "./data/vtuSubjects";
 
-const getGradePoint = (marks) => {
-  if (marks >= 90) return 10;
-  if (marks >= 80) return 9;
-  if (marks >= 70) return 8;
-  if (marks >= 60) return 7;
-  if (marks >= 50) return 6;
-  if (marks >= 45) return 5;
-  if (marks >= 40) return 4;
-  return 0;
-};
+import { getGradePoint, calculateSGPAFromSubjects } from './utils/grades';
+
 
 function App() {
   const [activeTab, setActiveTab] = useState("sgpa");
@@ -46,27 +38,12 @@ function App() {
   };
 
   const calculateSGPA = () => {
-    let totalCredits = 0;
-    let weightedPoints = 0;
-    let hasValid = false;
-
-    subjects.forEach((s) => {
-      const mk = Number(s.marks);
-      const cr = Number(s.credits);
-      if (Number.isFinite(mk) && Number.isFinite(cr) && mk >= 0 && mk <= 100) {
-        hasValid = true;
-        totalCredits += cr;
-        weightedPoints += getGradePoint(mk) * cr;
-      }
-    });
-
-    if (!hasValid || totalCredits <= 0) {
+    const sgpaValue = calculateSGPAFromSubjects(subjects);
+    if (sgpaValue === null) {
       setResult('Please enter at least one valid mark (0–100) to calculate SGPA.');
       return;
     }
-
-    const sgpa = Math.round((weightedPoints / totalCredits) * 100) / 100;
-    setResult(`SGPA: ${sgpa.toFixed(2)}`);
+    setResult(`SGPA: ${sgpaValue.toFixed(2)}`);
   };
 
   const addSemester = () => {
@@ -115,9 +92,13 @@ function App() {
         alert('Nothing to export!');
         return;
       }
-      const canvas = await html2canvas(exportNode, { scale: 3 });
+      const [{ default: JsPDF }, html2canvasImport] = await Promise.all([
+        import('jspdf'),
+        import('html2canvas')
+      ]);
+      const canvas = await html2canvasImport.default(exportNode, { scale: 3 });
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdf = new JsPDF.jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
