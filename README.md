@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+# VTU SGPA Calculator ⚡
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**VTU SGPA Calculator** is a lightweight React app to help VTU students calculate semester SGPA/CGPA, visualize subject marks with charts, and export results. This repository contains the source code, contribution guidelines, and information to run, test, and extend the project.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🔍 Demo
 
-### `npm start`
+![App screenshot](assets/screenshot.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> Tip: Replace `assets/screenshot.png` with an actual screenshot image (or `assets/screenshot.jpg`) to show the app UI in the README.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Easy input UI for subject marks and credits
+- Live visualizations using Chart.js for mark distribution and trends
+- Export results (PDF/screenshot) for record keeping
+- Responsive, accessible UI built with React
+- Simple zero-configuration developer experience (Create React App)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧰 Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- Chart.js
+- html2canvas + jsPDF (for exports)
+- Create React App
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 💻 Quick Start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+- Node.js v16 or later
+- npm
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Clone the repo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR.git
+cd VTU-SGPA-CALCULATOR
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Install dependencies
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Run in development
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Open http://localhost:3000 in your browser. The app reloads automatically when you edit files.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Build for production
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The production-ready files will be in the `build/` directory.
 
-### Making a Progressive Web App
+### Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm test
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📁 Project Structure
 
-### Deployment
+- `src/` — application source code
+- `public/` — static files and `index.html`
+- `assets/` — images/screenshots used in the README or app
+- `package.json` — scripts and dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🛠️ Development Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- You can run ESLint and Prettier if configured in the project.
+- To capture a screenshot for the README, run the app locally and save a screenshot to `assets/screenshot.png`.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read `CONTRIBUTING.md` for guidelines on reporting issues, proposing changes, and submitting pull requests. Be sure to:
+
+- Fork the repo
+- Create a feature branch
+- Add tests where appropriate
+- Submit a clear PR description
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the `LICENSE` file for details.
+
+---
+
+## 📬 Contact
+
+If you have questions, feature requests, or suggestions, open an issue or submit a PR on GitHub: https://github.com/theanikeeeeet/VTU-SGPA-CALCULATOR
+
+---
+
+### Acknowledgements
+
+Thanks to the open-source libraries and communities that make projects like this possible.
+
